@@ -1,0 +1,56 @@
+{
+	"Echo JSON": {
+		"prefix": "rejson",
+		"body": [
+			"echo json_encode([\"status\" => 1, \"data\" => $con->error]);"
+		],
+		"description": "For echoing json"
+		
+	},
+	"Simple Comment": {
+		"prefix": "rrr-simple-comment",
+		"body": "echo \" \\n $1:$2 \\n \";",
+		"description": "Simple commenting and debugging."
+	},
+	"SQL: Simple prepared sql statement": {
+		"prefix": "rr-simple-sql-prepared",
+		"body": [
+			"$con = $this->con();",
+			"$sql = \"SELECT * FROM users WHERE barangay = ? AND role = 'ENCODER'\";",
+			"$stmt = $con->prepare($sql);",
+			"$stmt->bind_param('s', $barangay);",
+			"$status = $stmt->execute();"
+		],
+		"description": "For simple sql prepared statement."
+	},
+	"SQL: SQL Error Check": {
+		"prefix": "rr-sql-error-json",
+		"body": [
+			"if(!$$res) {",
+				"\techo json_encode([\"status\" => 1, \"data\" => $$con->error]);",
+				"\treturn;",
+			"}"
+		],
+		"description": "Check error after sql query."
+	},
+	"SQL Prepare Statement": {
+		"prefix": "rrr-prepare-sql",
+		"body": [
+			"$$con = $$this->con();\n",
+            
+            "$$sql = \"$1\";",
+
+            "$$stmt = $$con->stmt_init();",
+            "if (!$stmt->prepare($$sql)) {",
+                "\techo json_encode([\"status\" => 1, \"data\" => $$stmt->error]);",
+                "\treturn;",
+            "} else {",
+                "\t$$stmt->bind_param(\"$2\", $3);",
+            "}",
+            "$$stmt->execute();",
+            "$$stmt->close();"
+		],
+		"description": "For creating sql prepared statement"
+		
+	},
+}

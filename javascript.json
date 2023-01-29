@@ -1,0 +1,123 @@
+{
+
+	"jQuery AJAX" : {
+		"prefix": "rr-ajax",
+		"body":[
+				"$.ajax({",
+					"\ttype: \"POST\",",
+					"\turl: \"$1\",",
+					"\tdata: {$2},",
+					"\tsuccess: function (data) {",
+						"\t\tlet d = JSON.parse(data);",
+						"\t\tif (d.status == 0) {",
+
+						"\t\t} else if (d.status == 1) {",
+							"\t\t\t_FUNC.error(d.data)",
+						"\t\t}",
+					"\t},",
+					"\terror: function(ex) {",
+						 "\t\tconsole.log(ex);",
+					 "\t}",
+				"});"
+			],
+		"description": "For AJAX JQuery"
+	},
+	"jQuery AJAX form data" : {
+		"prefix": "rr-ajax-formdata",
+		"body":[
+			"let form = new FormData(e.target);",
+			"form.append(\"x\", 8);",
+			"form.append(\"z\", \"ucn\");",
+	
+			"$.ajax({",
+				"type: \"POST\",",
+				"url: \"/profiling/won.php\",",
+				"data: form,",
+				"processData: false,",
+				"contentType: false,",
+				"success: function (data) {",
+					"let d = JSON.parse(data);",
+					"if (d.status == 0) {",
+						"Toast.fire({",
+							"icon: \"info\",",
+							"title: \"Changes saved!.\",",
+						"});",
+					"} else if (d.status == 1) {",
+						"won.error(d.data);",
+					"}",
+				"},",
+				"error: function (ex) {",
+					"console.log(ex);",
+				"},",
+			"});",
+			],
+		"description": "For AJAX JQuery form data"
+	},
+	"QuerySelector": {
+		"prefix": "rr-qs",
+		"body": "document.querySelector(\"#$1\");"
+	},
+	"Error Message": {
+		"prefix": "rr-swal-error-message",
+		"body": [
+			"Swal.fire(",
+				"\t\"PROFILE\",",
+				"\t\"Error encountered while deleting the record!\",",
+				"\t\"error\"",
+			");"
+		]
+	},
+	"Success Message": {
+		"prefix": "rr-swal-success-message",
+		"body": [
+			"Swal.fire(",
+				"\t\"PROFILE\",",
+				"\t\"Record successfully deleted!\",",
+				"\t\"success\"",
+			");"
+		]
+	},
+	"Error Message - Normal": {
+		"prefix": "rr-error-message",
+		"body": [
+			"Swal.fire(",
+				"\t\"PROFILE\",",
+				"\t\"Record  successfully deleted!\",",
+				"\t\"succes\"",
+			");"
+		]
+	},
+	"SweetAlert2-message-with-link": {
+		"prefix": "rr-sw2-message-with-link",
+		"body": [
+			"Swal.fire({",
+				"icon: 'error',",
+				"title: 'Oops...',",
+				"text: 'Something went wrong!',",
+				"footer: '<a href=\"\">Why do I have this issue?</a>'",
+			"});"
+		]
+	},
+	"SweetAlert2-confirm-dialog": {
+		"prefix": "rr-sw2-confirm-dialog",
+		"body": [
+			"Swal.fire({",
+				"title: 'Are you sure?',",
+				"text: \"You won't be able to revert this!\",",
+				"icon: 'warning',",
+				"showCancelButton: true,",
+				"confirmButtonColor: '#3085d6',",
+				"cancelButtonColor: '#d33',",
+				"confirmButtonText: 'Yes, delete it!'",
+			"}).then((result) => {",
+				"if (result.isConfirmed) {",
+					"Swal.fire(",
+						"'Deleted!',",
+						"'Your file has been deleted.',",
+						"'success'",
+					")",
+				"}",
+			"})"
+		]
+	},
+}
