@@ -15,11 +15,11 @@
 	"SQL: Simple prepared sql statement": {
 		"prefix": "rr-simple-sql-prepared",
 		"body": [
-			"$con = $this->con();",
-			"$sql = \"SELECT * FROM users WHERE barangay = ? AND role = 'ENCODER'\";",
-			"$stmt = $con->prepare($sql);",
-			"$stmt->bind_param('s', $barangay);",
-			"$status = $stmt->execute();"
+			"$$con = $$this->con();",
+			"$$sql = \"SELECT * FROM users WHERE barangay = ? AND role = 'ENCODER'\";",
+			"$$stmt = $$con->prepare($$sql);",
+			"$$stmt->bind_param('s', $$barangay);",
+			"$$status = $$stmt->execute();"
 		],
 		"description": "For simple sql prepared statement."
 	},
@@ -51,6 +51,27 @@
             "$$stmt->close();"
 		],
 		"description": "For creating sql prepared statement"
-		
 	},
+	"SQL normal select statement": {
+		"prefix": "rrr-sql-select",
+		"body": [
+			"$$con = $$this->con();\n", 
+			"$$sql = \"SELECT * FROM \";",
+			"$$res = $$con->query($$sql);",
+
+			"if(!$$res) {",
+			"\techo json_encode([\"status\" => 1, \"data\" => $$con->error]);",
+			"\treturn;",
+		"}"
+
+		],
+		"description": "For normal select sql statement."
+	},
+	"ECHO JSON": {
+		"prefix": "rrr-echo-json",
+		"body": [
+			"echo json_encode([\"status\" => $1, \"data\" => \"$2\"]);"
+		],
+		"description": "Returning a JSON for debugging or alert messages."
+	}
 }
